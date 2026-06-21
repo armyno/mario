@@ -1,19 +1,28 @@
 <html>
 <head>
-<link rel="icon" href="favicon.ico">
-<link type="text/css" rel="stylesheet" href="stylesheets/reset.css">
-<link type="text/css" rel="stylesheet" href="stylesheets/tile.css">
-<link type="text/css" rel="stylesheet" href="stylesheets/style.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
-<script type="text/javascript" src="javascripts/game_controller.js"></script>
-<script type="text/javascript" src="javascripts/main.js"></script>
-<script type="text/javascript" src="javascripts/tile.js"></script>
-<script type="text/javascript" src="javascripts/wordlist.js"></script>
 
-<div id="game-container"></div>
-<div id="word-to-type"></div>
+    <style>
+       #jsdos {
+            width: 100%;
+            height: 600px;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="https://v8.js-dos.com/v6.22/js-dos.js"></script>
+<canvas id="jsdos"></canvas>
+<script>
+    Dos(document.getElementById("jsdos"), {
+        wdosboxUrl: "https://v8.js-dos.com/v6.22/dosbox.js",
+    }).ready((fs, main) => {
+        fs.extract("https://cdn.jsdelivr.net/gh/armyno/mario@main/MARIO.jsdos").then(() => {
+            main(["-conf", ".jsdos/dosbox.conf"]);
+        });
+    });
+</script>
+
 </body>
 </html>
