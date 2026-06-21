@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Mario DOS</title>
     <style>
-        /* Đảm bảo html và body chiếm toàn bộ màn hình, không bị cuộn và xóa khoảng lề */
+        /* Xóa khoảng lề mặc định và ẩn thanh cuộn */
         html, body {
             width: 100%;
             height: 100%;
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: black;
+            background-color: #000; /* Nền đen cho đẹp mắt */
         }
 
-        .brdCmb .pTtl.itm { display: none; }
+        /* Ép canvas chiếm 100% diện tích cửa sổ trình duyệt */
+        #jsdos {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
     </style>
     <script src="https://v8.js-dos.com/v6.22/js-dos.js"></script>
 </head>
@@ -24,7 +30,7 @@
     <script>
         const canvas = document.getElementById("jsdos");
 
-        // Khởi tạo DOSBox
+        // 1. Khởi tạo game như cũ
         Dos(canvas, {
             wdosboxUrl: "https://v8.js-dos.com/v6.22/dosbox.js",
         }).ready((fs, main) => {
@@ -33,24 +39,24 @@
             });
         });
 
-        // Kích hoạt Fullscreen khi nhấp đúp chuột (Double-click) vào game
+        // 2. Thêm sự kiện nhấp đúp chuột để bật/tắt chế độ Toàn màn hình
         canvas.addEventListener("dblclick", () => {
             if (!document.fullscreenElement) {
-                // Yêu cầu bật toàn màn hình
+                // Bật toàn màn hình
                 if (canvas.requestFullscreen) {
                     canvas.requestFullscreen();
-                } else if (canvas.webkitRequestFullscreen) { /* Dành cho Safari */
+                } else if (canvas.webkitRequestFullscreen) { /* Safari */
                     canvas.webkitRequestFullscreen();
-                } else if (canvas.msRequestFullscreen) { /* Dành cho IE11 */
+                } else if (canvas.msRequestFullscreen) { /* IE11 */
                     canvas.msRequestFullscreen();
                 }
             } else {
                 // Thoát toàn màn hình
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) { /* Dành cho Safari */
+                } else if (document.webkitExitFullscreen) { /* Safari */
                     document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { /* Dành cho IE11 */
+                } else if (document.msExitFullscreen) { /* IE11 */
                     document.msExitFullscreen();
                 }
             }
